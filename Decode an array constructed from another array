@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+void decode(int inp[], int m)
+{
+    if (m == 0 || m == 2) {
+        return;
+    }
+
+    int n = (sqrt(8*m + 1) + 1) / 2;
+ 
+    int A[n];
+ 
+    if (n == 1 || m == 1) {
+        A[0] = inp[0];
+    }
+    else if (n == 2) {
+        A[0] = inp[0] - inp[1];
+    }
+    else {
+        A[0] = (inp[0] + inp[1] - inp[n - 1]) / 2;
+    }
+ 
+    for (int i = 1; i < n; i++) {
+        A[i] = inp[i - 1] - A[0];
+    }
+ 
+    for (int i = 0; i < n; i++) {
+        cout << A[i] << " ";
+    }
+}
+ 
+int main()
+{
+    int inp[] = { 3, 4, 5, 6, 5, 6, 7, 7, 8, 9 };
+    int m = sizeof(inp)/sizeof(inp[0]);
+ 
+    decode(inp, m);
+ 
+    return 0;
+}
